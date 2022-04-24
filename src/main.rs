@@ -1,4 +1,4 @@
-use std::{fs, process::Command};
+use std::{fs, process::Command, env};
 fn main() {
     let distro = get_distro();
     println!("OS: {}", distro);
@@ -9,6 +9,11 @@ fn main() {
     println!("Available Root Partition (Gb): {}", get_available_disk());
     println!("Used Root Partition (Gb): {}", get_used_disk());
     println!("CPU: {}", get_cpu_name());
+    println!("Desktop: {}", get_de());
+}
+
+fn get_de() -> String {
+    return env::var("XDG_CURRENT_DESKTOP").unwrap_or("".to_string());
 }
 
 fn get_cpu_name() -> String {
