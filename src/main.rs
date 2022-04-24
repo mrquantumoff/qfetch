@@ -5,7 +5,18 @@ fn main() {
     if asciiart !="NOASCII" {
         println!("{}", asciiart.bright_cyan());
     }
-    
+    let mut showversion: bool = false;
+    let args: Vec<String> = env::args().collect();
+    for arg in args {
+        if arg == "--help" || arg == "-h" {
+            get_help();
+            std::process::exit(0);
+        }
+        else if arg=="--version" || arg=="-v" {
+            showversion = true;
+        }
+    }
+    const VERSION: &str = env!("CARGO_PKG_VERSION");
     let ost = "OS: ".magenta();
     let totmem = "Total RAM (Gb): ".blue();
     let avmem = "Available RAM (Gb): ".blue();
@@ -18,6 +29,8 @@ fn main() {
     let session_type = "Session Type: ".yellow();
     let username = "Username: ".yellow();
     let editor = "Editor: ".yellow();
+    let version = "Version: ".magenta();
+    if showversion {println!("{}{}", version, VERSION);}
     println!("{}","=======================".green());
     println!("{ost}{}", get_distro());
     println!("{cpu}{}", get_cpu_name());
@@ -34,6 +47,14 @@ fn main() {
     println!("{}","=======================".green());
 }
 
+fn get_help() {
+    let help = "
+    Usage:
+    -h, --help: Show this help message
+    -v, --version: Show version in fetch info
+    ";
+    println!("{}", help);
+}
 
 fn get_editor() -> String {
     let editor = env::var("EDITOR");
