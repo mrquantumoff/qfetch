@@ -46,15 +46,27 @@ fn get_editor() -> String {
 }
 
 fn get_terminal() -> String {
-    let term = env::var("TERM_PROGRAM").unwrap_or("".to_string())=="";
-    let term = term.to_string();
-    term
+    let de = get_de();
+    if de!="Unknown or tty"{
+        let term = env::var("TERM_PROGRAM").unwrap();
+        let term = term.to_string();
+        term
+    }
+    else {
+        "Unknown".to_string()
+    }
 }
 
 fn get_user() -> String {
-    let user = env::var("USERNAME").unwrap_or("".to_string())=="";
-    let user = user.to_string();
-    return user;
+    let de = get_de();
+    if de!="Unknown or tty"{
+        let user = env::var("USERNAME").unwrap();
+        let user = user.to_string();
+        return user;
+    }
+    else {
+        return "Unknown".to_string();
+    }
 }
 
 fn get_session_type() -> String {
