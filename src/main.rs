@@ -30,10 +30,12 @@ fn main() {
     let username = "Username: ".yellow();
     let editor = "Editor: ".yellow();
     let version = "Version: ".magenta();
+    let kernel = "Kernel: ".magenta();
     if showversion {println!("{}{}", version, VERSION);}
     println!("{}","=======================".green());
     println!("{ost}{}", get_distro());
     println!("{cpu}{}", get_cpu_name());
+    println!("{kernel}{}", get_kernel());
     println!("{totmem}{}", get_total_ram());   
     println!("{avmem}{}", get_available_ram());
     println!("{usedmem}{}", get_used_ram());
@@ -136,6 +138,17 @@ fn get_used_disk() -> String {
     let mut lines = output_string.lines();
     lines.next();
     let tt = lines.next().unwrap().split_whitespace().nth(2).unwrap().to_string();
+    return tt.to_owned();  
+}
+
+fn get_kernel() -> String {
+    let output = Command::new("uname")
+        .arg("-r")
+        .output()
+        .expect("failed to execute process");
+    let output_string = String::from_utf8_lossy(&output.stdout);
+    let mut lines = output_string.lines();
+    let tt = lines.next().unwrap().to_string();
     return tt.to_owned();  
 }
 
