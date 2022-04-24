@@ -6,28 +6,54 @@ fn main() {
         println!("{}", asciiart.bright_cyan());
     }
     
-    let ost = "OS: ".bright_yellow();
-    let totmem = "Total RAM (Gb): ".bright_green();
-    let avmem = "Available RAM (Gb): ".green();
-    let usedmem = "Used RAM (Gb): ".yellow();
-    let totalroot = "Total Root Partition (Gb): ".bright_green();
-    let avroot = "Available Root Partition (Gb): ".green();
-    let usedroot = "Used Root Partition (Gb): ".yellow();
-    let cpu = "CPU: ".green();
-    let desktop = "Desktop: ".green();
+    let ost = "OS: ".magenta();
+    let totmem = "Total RAM (Gb): ".blue();
+    let avmem = "Available RAM (Gb): ".blue();
+    let usedmem = "Used RAM (Gb): ".blue();
+    let totalroot = "Total Root Partition (Gb): ".red();
+    let avroot = "Available Root Partition (Gb): ".red();
+    let usedroot = "Used Root Partition (Gb): ".red();
+    let cpu = "CPU: ".magenta();
+    let desktop = "Desktop: ".yellow();
     let session_type = "Session Type: ".yellow();
-    println!("{}","=======================".bright_red());
+    let username = "Username: ".yellow();
+    let terminal = "Terminal: ".yellow();
+    let editor = "Editor: ".yellow();
+    println!("{}","=======================".green());
     println!("{ost}{}", get_distro());
+    println!("{cpu}{}", get_cpu_name());
     println!("{totmem}{}", get_total_ram());   
     println!("{avmem}{}", get_available_ram());
     println!("{usedmem}{}", get_used_ram());
     println!("{totalroot}{}", get_total_disk());
     println!("{avroot}{}", get_available_disk());
-    println!("{usedroot}{}", get_used_disk());
-    println!("{cpu}{}", get_cpu_name());
+    println!("{usedroot}{}", get_used_disk());    
     println!("{desktop}{}", get_de());
     println!("{session_type}{}", get_session_type());
-    println!("{}","=======================".bright_red());
+    println!("{username}{}", get_user());
+    println!("{terminal}{}", get_terminal());
+    println!("{editor}{}", get_editor());
+    println!("{}","=======================".green());
+}
+
+
+fn get_editor() -> String {
+    let editor = env::var("EDITOR");
+    match editor {
+        Ok(val) => val,
+        Err(_) => "Not Set".to_string(),
+    }
+}
+
+fn get_terminal() -> String {
+    let term = env::var("TERM_PROGRAM").unwrap();
+    let term = term.to_string();
+    term
+}
+
+fn get_user() -> String {
+    let user = env::var("USERNAME").unwrap();
+    user
 }
 
 fn get_session_type() -> String {
