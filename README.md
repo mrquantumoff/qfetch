@@ -2,6 +2,8 @@
 
 qfetch is a tool that fetches info about your linux install.
 
+## Status [![Pipeline](https://github.com/mrquantumoff/qfetch/actions/workflows/rust.yml/badge.svg)](https://github.com/mrquantumoff/qfetch/actions/workflows/rust.yml)
+
 ## Dependencies
 * /proc/meminfo with the following fields:
     * MemTotal in the 1st line
