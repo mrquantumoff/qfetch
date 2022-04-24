@@ -20,6 +20,9 @@ qfetch is a tool that fetches info about your linux install.
 ## Installation using cargo
 * Dead simple, run ```cargo install qfetch```
 
+## Installation on Arch Linux or Arch Based Distros
+![Available on AUR](https://aur.archlinux.org/packages/qfetch/)
+
 ## Help
 * Before creating an issue please check out the [wiki](https://github.com/mrquantumoff/qfetch/wiki/Setting-up-ASCII-logos)
 * If the previous step didn't help, create an issue!
