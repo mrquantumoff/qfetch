@@ -31,11 +31,17 @@ fn main() {
 }
 
 fn get_session_type() -> String {
-    let session_type = env::var("XDG_SESSION_TYPE").unwrap();
-    if session_type!="" {
-        return session_type;
+    let de = get_de();
+    if de!="Unknown or tty"{
+        let session_type = env::var("XDG_SESSION_TYPE").unwrap();
+        if session_type!="" {
+            return session_type;
+        }    
+        else{
+            return "Unknown or tty".to_string();
+        }
     }
-    else{
+    else {
         return "Unknown or tty".to_string();
     }
 }
