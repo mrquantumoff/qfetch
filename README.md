@@ -12,6 +12,7 @@ qfetch is a tool that fetches info about your linux install.
 * [GNU Coreutils](https://www.gnu.org/software/coreutils/) with the ```df``` command
 * /etc/os-release with the following fields:
     * PRETTY_NAME
+* Rust and Cargo of course!
 ## Installation
 * Clone the repository
 * Install the dependencies and rust via rustup
