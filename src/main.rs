@@ -1,19 +1,34 @@
 use std::{fs, process::Command, env};
+use colored::*;
 fn main() {
     let distro = get_distro();
-    println!("OS: {}", distro);
-    println!("Total RAM (Gb): {}", get_total_ram());   
-    println!("Avaible RAM (Gb): {}", get_available_ram());
-    println!("Used RAM (Gb): {}", get_used_ram());
-    println!("Total Root Partition (Gb): {}", get_total_disk());
-    println!("Available Root Partition (Gb): {}", get_available_disk());
-    println!("Used Root Partition (Gb): {}", get_used_disk());
-    println!("CPU: {}", get_cpu_name());
-    println!("Desktop: {}", get_de());
+    let ost = "OS: ".bright_yellow();
+    let totmem = "Total RAM (Gb): ".blue();
+    let avmem = "Available RAM (Gb): ".green();
+    let usedmem = "Used RAM (Gb): ".red();
+    let totalroot = "Total Root Partition (Gb): ".blue();
+    let avroot = "Available Root Partition (Gb): ".green();
+    let usedroot = "Used Root Partition (Gb): ".yellow();
+    let cpu = "CPU: ".magenta();
+    let desktop = "Desktop: ".bright_cyan();
+    println!("{ost}{}", distro);
+    println!("{totmem}{}", get_total_ram());   
+    println!("{avmem}{}", get_available_ram());
+    println!("{usedmem}{}", get_used_ram());
+    println!("{totalroot}{}", get_total_disk());
+    println!("{avroot}{}", get_available_disk());
+    println!("{usedroot}{}", get_used_disk());
+    println!("{cpu}{}", get_cpu_name());
+    println!("{desktop}{}", get_de());
 }
 
 fn get_de() -> String {
-    return env::var("XDG_CURRENT_DESKTOP").unwrap_or("".to_string());
+    if env::var("XDG_CURRENT_DESKTOP").unwrap_or("".to_string())=="" {
+        return "Unknown or tty".to_string();
+    }
+    else {
+        return env::var("XDG_CURRENT_DESKTOP").unwrap_or("".to_string()); 
+    }
 }
 
 fn get_cpu_name() -> String {
