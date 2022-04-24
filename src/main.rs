@@ -17,7 +17,6 @@ fn main() {
     let desktop = "Desktop: ".yellow();
     let session_type = "Session Type: ".yellow();
     let username = "Username: ".yellow();
-    let terminal = "Terminal: ".yellow();
     let editor = "Editor: ".yellow();
     println!("{}","=======================".green());
     println!("{ost}{}", get_distro());
@@ -31,7 +30,6 @@ fn main() {
     println!("{desktop}{}", get_de());
     println!("{session_type}{}", get_session_type());
     println!("{username}{}", get_user());
-    println!("{terminal}{}", get_terminal());
     println!("{editor}{}", get_editor());
     println!("{}","=======================".green());
 }
@@ -45,17 +43,7 @@ fn get_editor() -> String {
     }
 }
 
-fn get_terminal() -> String {
-    let de = get_de();
-    if de!="Unknown or tty"{
-        let term = env::var("TERM_PROGRAM").unwrap();
-        let term = term.to_string();
-        term
-    }
-    else {
-        "Unknown".to_string()
-    }
-}
+
 
 fn get_user() -> String {
     let de = get_de();
