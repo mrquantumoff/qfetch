@@ -17,3 +17,5 @@ qfetch is a tool that fetches info about your linux install.
 * Install the dependencies and rust via rustup
 * Run ```cargo build -r``` to build the executable
 * Your executable is ```target/release/qfetch```, go ahead and run/install it somewhere
+## Installation using cargo
+* Dead simple, run ```cargo install qfetch```
