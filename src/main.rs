@@ -46,14 +46,15 @@ fn get_editor() -> String {
 }
 
 fn get_terminal() -> String {
-    let term = env::var("TERM_PROGRAM").unwrap();
+    let term = env::var("TERM_PROGRAM").unwrap_or("".to_string())=="";
     let term = term.to_string();
     term
 }
 
 fn get_user() -> String {
-    let user = env::var("USERNAME").unwrap();
-    user
+    let user = env::var("USERNAME").unwrap_or("".to_string())=="";
+    let user = user.to_string();
+    return user;
 }
 
 fn get_session_type() -> String {
