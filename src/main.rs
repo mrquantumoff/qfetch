@@ -169,28 +169,31 @@ fn get_total_disk() -> String {
 fn get_available_ram() -> String {
     let meminfo = fs::read_to_string("/proc/meminfo").unwrap();
     let lines: Vec<&str> = meminfo.split('\n').collect();
-    let mut av = lines[2].split_whitespace().nth(1).unwrap().parse::<u64>().unwrap();
+    let mut av = lines[2].split_whitespace().nth(1).unwrap().parse::<f64>().unwrap();
     // Convert to gigabytes
-    av /= 1048576;
-    return av.to_string().to_owned();
+    av /= 1048576.0;
+    let y = (av * 100.0).round() / 100.0;
+    return y.to_string().to_owned()+ " Gb";
 }
 
 fn get_used_ram() -> String {
     let meminfo = fs::read_to_string("/proc/meminfo").unwrap();
     let lines: Vec<&str> = meminfo.split('\n').collect();
-    let mut av = lines[6].split_whitespace().nth(1).unwrap().parse::<u64>().unwrap();
+    let mut av = lines[6].split_whitespace().nth(1).unwrap().parse::<f64>().unwrap();
     // Convert to gigabytes
-    av /= 1048576;
-    return av.to_string().to_owned();
+    av /= 1048576.0;
+    let y = (av * 100.0).round() / 100.0;
+    return y.to_string().to_owned()+ " Gb";
 }
 
 fn get_total_ram() -> String {
     let meminfo = fs::read_to_string("/proc/meminfo").unwrap();
     let lines: Vec<&str> = meminfo.split('\n').collect();
-    let mut total_mem = lines[0].split_whitespace().nth(1).unwrap().parse::<u64>().unwrap();
+    let mut total_mem = lines[0].split_whitespace().nth(1).unwrap().parse::<f64>().unwrap();
     // Convert to gigabytes
-    total_mem /= 1048576;
-    return total_mem.to_string().to_owned();
+    total_mem /= 1048576.0;
+    let y = (total_mem * 100.0).round() / 100.0;
+    return y.to_string().to_owned()+ " Gb";
 }
 
 fn get_distro() -> String {
