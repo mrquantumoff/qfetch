@@ -2,7 +2,14 @@
 name = "qfetch"
 version = "0.1.0"
 edition = "2021"
-
+description = "qfetch is a simple fetch tool inspired by pfetch, but written in rust."
+license = "BSD-2-Clause"
+authors = ["Demir Yerli <mrquantumoff@protonmail.com>"]
+rust-version="1.60"
+homepage = "https://github.com/mrquantumoff/qfetch"
+repository = "https://github.com/mrquantumoff/qfetch.git"
+keywords = ["fetch", "info"]
+categories = ["command-line-utilities"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
