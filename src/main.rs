@@ -5,6 +5,48 @@ fn main() {
     println!("Total RAM (Gb): {}", get_total_ram());   
     println!("Avaible RAM (Gb): {}", get_available_ram());
     println!("Used RAM (Gb): {}", get_used_ram());
+    println!("Total Root Partition (Gb): {}", get_total_disk());
+    println!("Available Root Partition (Gb): {}", get_available_disk());
+    println!("Used Root Partition (Gb): {}", get_used_disk());
+}
+
+fn get_used_disk() -> String {
+    let output = Command::new("df")
+        .arg("-h")
+        .arg("/")
+        .output()
+        .expect("failed to execute process");
+    let output_string = String::from_utf8_lossy(&output.stdout);
+    let mut lines = output_string.lines();
+    lines.next();
+    let tt = lines.next().unwrap().split_whitespace().nth(2).unwrap().to_string();
+    return tt.to_owned();  
+}
+
+fn get_available_disk() -> String {
+    let output = Command::new("df")
+        .arg("-h")
+        .arg("/")
+        .output()
+        .expect("failed to execute process");
+        let output_string = String::from_utf8_lossy(&output.stdout);
+        let mut lines = output_string.lines();
+        lines.next();
+        let av = lines.next().unwrap().split_whitespace().nth(3).unwrap().to_string();
+        return av.to_owned();
+}
+
+fn get_total_disk() -> String {
+    let output = Command::new("df")
+        .arg("-h")
+        .arg("/")
+        .output()
+        .expect("failed to execute process");
+    let output_string = String::from_utf8_lossy(&output.stdout);
+    let mut lines = output_string.lines();
+    lines.next();
+    let tt = lines.next().unwrap().split_whitespace().nth(1).unwrap().to_string();
+    return tt.to_owned();
 }
 
 fn get_available_ram() -> String {
