@@ -122,7 +122,6 @@ fn get_cpu_name() -> String {
     let mut av = lines[4].split(" ").to_owned().collect::<Vec<&str>>();
     av.remove(0);
     av.remove(0);
-    av.remove(0);
     let strav = av.join(" ");
     return strav;
 }
