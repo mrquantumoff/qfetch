@@ -16,37 +16,77 @@ fn main() {
             showversion = true;
         }
     }
-    const VERSION: &str = env!("CARGO_PKG_VERSION");
-    let ost = "OS: ".magenta();
-    let totmem = "Total RAM (Gb): ".blue();
-    let avmem = "Available RAM (Gb): ".blue();
-    let usedmem = "Used RAM (Gb): ".blue();
-    let totalroot = "Total Root Partition (Gb): ".red();
-    let avroot = "Available Root Partition (Gb): ".red();
-    let usedroot = "Used Root Partition (Gb): ".red();
-    let cpu = "CPU: ".magenta();
-    let desktop = "Desktop: ".yellow();
-    let session_type = "Session Type: ".yellow();
-    let username = "Username: ".yellow();
-    let editor = "Editor: ".yellow();
-    let version = "Version: ".magenta();
-    let kernel = "Kernel: ".magenta();
-    if showversion {println!("{}{}", version, VERSION);}
-    println!("{}","=======================".green());
-    println!("{ost}{}", get_distro());
-    println!("{cpu}{}", get_cpu_name());
-    println!("{kernel}{}", get_kernel());
-    println!("{totmem}{}", get_total_ram());   
-    println!("{avmem}{}", get_available_ram());
-    println!("{usedmem}{}", get_used_ram());
-    println!("{totalroot}{}", get_total_disk());
-    println!("{avroot}{}", get_available_disk());
-    println!("{usedroot}{}", get_used_disk());    
-    println!("{desktop}{}", get_de());
-    println!("{session_type}{}", get_session_type());
-    println!("{username}{}", get_user());
-    println!("{editor}{}", get_editor());
-    println!("{}","=======================".green());
+    let style = get_style();
+    if style == "default" {
+        
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let ost = "OS: ".magenta();
+        let totmem = "Total RAM (Gb): ".blue();
+        let avmem = "Available RAM (Gb): ".blue();
+        let usedmem = "Used RAM (Gb): ".blue();
+        let totalroot = "Total Root Partition (Gb): ".red();
+        let avroot = "Available Root Partition (Gb): ".red();
+        let usedroot = "Used Root Partition (Gb): ".red();
+        let cpu = "CPU: ".magenta();
+        let desktop = "Desktop: ".yellow();
+        let session_type = "Session Type: ".yellow();
+        let username = "Username: ".yellow();
+        let editor = "Editor: ".yellow();
+        let version = "Version: ".magenta();
+        let kernel = "Kernel: ".magenta();
+        if showversion {println!("{}{}", version, VERSION);}
+        println!("{}","=======================".green());
+        println!("{ost}{}", get_distro());
+        println!("{cpu}{}", get_cpu_name());
+        println!("{kernel}{}", get_kernel());
+        println!("{totmem}{}", get_total_ram());   
+        println!("{avmem}{}", get_available_ram());
+        println!("{usedmem}{}", get_used_ram());
+        println!("{totalroot}{}", get_total_disk());
+        println!("{avroot}{}", get_available_disk());
+        println!("{usedroot}{}", get_used_disk());    
+        println!("{desktop}{}", get_de());
+        println!("{session_type}{}", get_session_type());
+        println!("{username}{}", get_user());
+        println!("{editor}{}", get_editor());
+        println!("{}","=======================".green());
+        std::process::exit(0);
+    }
+    else if style == "box" {
+        
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let ost = "OS: ".magenta();
+        let totmem = "Total RAM (Gb): ".blue();
+        let avmem = "Available RAM (Gb): ".blue();
+        let usedmem = "Used RAM (Gb): ".blue();
+        let totalroot = "Total Root Partition (Gb): ".red();
+        let avroot = "Available Root Partition (Gb): ".red();
+        let usedroot = "Used Root Partition (Gb): ".red();
+        let cpu = "CPU: ".magenta();
+        let desktop = "Desktop: ".yellow();
+        let session_type = "Session Type: ".yellow();
+        let username = "Username: ".yellow();
+        let editor = "Editor: ".yellow();
+        let version = "Version: ".magenta();
+        let kernel = "Kernel: ".magenta();
+        let col = "||".green();
+        if showversion {println!("{}{}", version, VERSION);}
+        println!("{}","*================================================*".green());
+        println!("{col} {ost}{} {}", get_distro(), "");
+        println!("{col} {cpu}{} {}", get_cpu_name(), "");
+        println!("{col} {kernel} {} {}", get_kernel(), "");
+        println!("{col} {totmem}{} {}", get_total_ram(), "");   
+        println!("{col} {avmem}{} {}", get_available_ram(), "");
+        println!("{col} {usedmem}{} {}", get_used_ram(), "");
+        println!("{col} {totalroot}{} {}", get_total_disk(), "");
+        println!("{col} {avroot}{} {}", get_available_disk(), "");
+        println!("{col} {usedroot}{}", get_used_disk());    
+        println!("{col} {desktop}{}", get_de());
+        println!("{col} {session_type}{}", get_session_type());
+        println!("{col} {username}{}", get_user());
+        println!("{col} {editor}{}", get_editor());
+        println!("{}","*================================================*".green());
+    }
 }
 
 fn get_help() {
@@ -66,7 +106,19 @@ fn get_editor() -> String {
     }
 }
 
-
+fn get_style() -> String {
+    let homedir = env::var("HOME").unwrap_or("".to_string());
+    let cfgpath=homedir+"/.config/qfetch/config.txt";
+    if fs::metadata(cfgpath.clone()).is_ok() {
+    let contents = fs::read_to_string(cfgpath).expect("Something went wrong reading the file");
+    let lines: Vec<&str> = contents.split("\n").collect();
+    let style = lines[0].to_string();
+    return style;
+    }
+    else {
+        return "default".to_string();
+    }
+}
 
 fn get_user() -> String {
     let de = get_de();
