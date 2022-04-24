@@ -19,3 +19,7 @@ qfetch is a tool that fetches info about your linux install.
 * Your executable is ```target/release/qfetch```, go ahead and run/install it somewhere
 ## Installation using cargo
 * Dead simple, run ```cargo install qfetch```
+
+## Help
+* Before creating an issue please check out the [wiki](https://github.com/mrquantumoff/qfetch/wiki/Setting-up-ASCII-logos)
+* If the previous step didn't help, create an issue!
