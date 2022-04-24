@@ -52,7 +52,7 @@ fn main() {
         println!("{}","=======================".green());
         std::process::exit(0);
     }
-    else if style == "box" {
+    else if style == "column" {
         
         const VERSION: &str = env!("CARGO_PKG_VERSION");
         let ost = "OS: ".magenta();
