@@ -1,6 +1,10 @@
 use std::{fs, process::Command, env};
 use colored::*;
 fn main() {
+    let asciiart = get_ascii_art();
+    if asciiart !="NOASCII" {
+        println!("{}", asciiart.bright_cyan());
+    }
     let distro = get_distro();
     let ost = "OS: ".bright_yellow();
     let totmem = "Total RAM (Gb): ".blue();
@@ -21,6 +25,20 @@ fn main() {
     println!("{cpu}{}", get_cpu_name());
     println!("{desktop}{}", get_de());
 }
+
+
+fn get_ascii_art() -> String {
+    let homedir = env::var("HOME").unwrap_or("".to_string());
+    let ascii_art_path=homedir+"/.config/qfetch/ascii_art.txt";
+    if fs::metadata(ascii_art_path.clone()).is_ok() {
+        let ascii_art = fs::read_to_string(ascii_art_path).expect("Error reading ascii art");
+        return ascii_art;
+    }
+    else {
+        return "NOASCII".to_owned();
+    }
+}
+
 
 fn get_de() -> String {
     if env::var("XDG_CURRENT_DESKTOP").unwrap_or("".to_string())=="" {
