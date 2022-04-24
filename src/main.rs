@@ -5,17 +5,19 @@ fn main() {
     if asciiart !="NOASCII" {
         println!("{}", asciiart.bright_cyan());
     }
-    let distro = get_distro();
+    
     let ost = "OS: ".bright_yellow();
-    let totmem = "Total RAM (Gb): ".blue();
+    let totmem = "Total RAM (Gb): ".bright_green();
     let avmem = "Available RAM (Gb): ".green();
-    let usedmem = "Used RAM (Gb): ".red();
-    let totalroot = "Total Root Partition (Gb): ".blue();
+    let usedmem = "Used RAM (Gb): ".yellow();
+    let totalroot = "Total Root Partition (Gb): ".bright_green();
     let avroot = "Available Root Partition (Gb): ".green();
     let usedroot = "Used Root Partition (Gb): ".yellow();
-    let cpu = "CPU: ".magenta();
-    let desktop = "Desktop: ".bright_cyan();
-    println!("{ost}{}", distro);
+    let cpu = "CPU: ".green();
+    let desktop = "Desktop: ".green();
+    let session_type = "Session Type: ".yellow();
+    println!("{}","=======================".bright_red());
+    println!("{ost}{}", get_distro());
     println!("{totmem}{}", get_total_ram());   
     println!("{avmem}{}", get_available_ram());
     println!("{usedmem}{}", get_used_ram());
@@ -24,8 +26,19 @@ fn main() {
     println!("{usedroot}{}", get_used_disk());
     println!("{cpu}{}", get_cpu_name());
     println!("{desktop}{}", get_de());
+    println!("{session_type}{}", get_session_type());
+    println!("{}","=======================".bright_red());
 }
 
+fn get_session_type() -> String {
+    let session_type = env::var("XDG_SESSION_TYPE").unwrap();
+    if session_type!="" {
+        return session_type;
+    }
+    else{
+        return "Unknown or tty".to_string();
+    }
+}
 
 fn get_ascii_art() -> String {
     let homedir = env::var("HOME").unwrap_or("".to_string());
