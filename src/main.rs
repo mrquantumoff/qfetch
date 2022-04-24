@@ -8,6 +8,18 @@ fn main() {
     println!("Total Root Partition (Gb): {}", get_total_disk());
     println!("Available Root Partition (Gb): {}", get_available_disk());
     println!("Used Root Partition (Gb): {}", get_used_disk());
+    println!("CPU: {}", get_cpu_name());
+}
+
+fn get_cpu_name() -> String {
+    let meminfo = fs::read_to_string("/proc/cpuinfo").unwrap();
+    let lines: Vec<&str> = meminfo.split('\n').collect();
+    let mut av = lines[4].split(" ").to_owned().collect::<Vec<&str>>();
+    av.remove(0);
+    av.remove(0);
+    av.remove(0);
+    let strav = av.join(" ");
+    return strav;
 }
 
 fn get_used_disk() -> String {
