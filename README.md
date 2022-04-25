@@ -13,7 +13,16 @@ qfetch is a tool that fetches info about your linux install.
 * /etc/os-release with the following fields:
     * PRETTY_NAME
 * Rust and Cargo of course!
-## Installation
+* Optionally you can install ```make``` to build the app
+
+## Installation via ```make```
+* Clone the repo
+* Install the dependencies
+* Run ```make``` to build the app
+* Run ```sudo make install``` to install the app
+* Run ```qfetch``` to see the output
+
+## Installation via ``` cargo build ```
 * Clone the repository
 * Install the dependencies and rust via rustup
 * Run ```cargo build -r``` to build the executable

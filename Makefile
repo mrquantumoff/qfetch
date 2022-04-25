@@ -7,4 +7,5 @@ clean:
 bin:
 	cargo build --release
 install:
-	install -Dm755 -t /usr/bin/ target/release/qfetch
+	install -Dm755 -t /bin/ target/release/qfetch
+	chmod +x /bin/qfetch
