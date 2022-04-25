@@ -34,9 +34,11 @@ fn main() {
         let editor = "Editor: ".yellow();
         let version = "Version: ".magenta();
         let kernel = "Kernel: ".magenta();
+        let hostname = "Hostname: ".magenta();
         if showversion {println!("{}{}", version, VERSION);}
         println!("{}","=======================".green());
         println!("{ost}{}", get_distro());
+        println!("{hostname} {}", get_hostname());
         println!("{cpu}{}", get_cpu_name());
         println!("{kernel}{}", get_kernel());
         println!("{totmem}{}", get_total_ram());   
@@ -69,10 +71,12 @@ fn main() {
         let editor = "Editor: ".yellow();
         let version = "Version: ".magenta();
         let kernel = "Kernel: ".magenta();
+        let hostname = "Hostname: ".magenta();
         let col = "||".green();
         if showversion {println!("{}{}", version, VERSION);}
         println!("{}","*================================================*".green());
         println!("{col} {ost}{} {}", get_distro(), "");
+        println!("{col} {hostname} {}", get_hostname());
         println!("{col} {cpu}{} {}", get_cpu_name(), "");
         println!("{col} {kernel} {} {}", get_kernel(), "");
         println!("{col} {totmem}{} {}", get_total_ram(), "");   
@@ -228,6 +232,18 @@ fn get_total_disk() -> String {
     lines.next();
     let tt = lines.next().unwrap().split_whitespace().nth(1).unwrap().to_string();
     return tt.to_owned();
+}
+
+fn get_hostname() -> String {
+    if fs::metadata("/etc/hostname").is_ok() {
+        let mut res = fs::read_to_string("/etc/hostname").unwrap();
+        let rs: Vec<&str> = res.split("\n").collect();
+        res = rs[0].to_string();
+        return res.to_string();
+    }
+    else {
+        return "No hostname set in /etc/hostname".to_string();
+    }
 }
 
 fn get_available_ram() -> String {
