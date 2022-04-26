@@ -15,6 +15,12 @@ qfetch is a tool that fetches info about your linux install.
 * Rust and Cargo of course!
 * Optionally you can install ```make``` to build the app
 
+## Installation via ```wake```
+* Clone the repo
+* Install the dependencies
+* Run ```wake``` to build
+* Run ```wake -s .wake/install.Wakefile``` to install
+
 ## Installation via ```make```
 * Clone the repo
 * Install the dependencies
