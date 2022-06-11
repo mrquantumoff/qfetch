@@ -1,11 +1,11 @@
 [package]
 name = "qfetch"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2021"
 description = "qfetch is a simple fetch tool inspired by pfetch, but written in rust."
 license = "BSD-2-Clause"
 authors = ["Demir Yerli <mrquantumoff@protonmail.com>"]
-rust-version="1.60"
+rust-version="1.61"
 homepage = "https://github.com/mrquantumoff/qfetch"
 repository = "https://github.com/mrquantumoff/qfetch.git"
 keywords = ["fetch", "info"]
