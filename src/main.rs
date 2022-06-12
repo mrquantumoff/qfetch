@@ -74,6 +74,7 @@ fn main() {
         if showversion {
             println!("{}{}", version, VERSION);
         }
+
         println!(
             "{}",
             "*================================================*".green()
@@ -97,6 +98,51 @@ fn main() {
             "*================================================*".green()
         );
     }
+    else if style == "dracula" {
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let ost = "OS: ".magenta();
+        let totmem = "Total RAM (Gb): ".magenta();
+        let avmem = "Available RAM (Gb): ".magenta();
+        let usedmem = "Used RAM (Gb): ".magenta();
+        let totalroot = "Total Root Partition (Gb): ".magenta();
+        let avroot = "Available Root Partition (Gb): ".magenta();
+        let usedroot = "Used Root Partition (Gb): ".magenta();
+        let cpu = "CPU: ".magenta();
+        let desktop = "Desktop: ".magenta();
+        let session_type = "Session Type: ".magenta();
+        let username = "Username: ".magenta();
+        let editor = "Editor: ".magenta();
+        let version = "Version: ".magenta();
+        let kernel = "Kernel: ".magenta();
+        let hostname = "Hostname: ".magenta();
+        let col = "||".bright_magenta();
+        if showversion {
+            println!("{}{}", version, VERSION);
+        }
+        println!(
+            "{}",
+            "*================================================*".bright_magenta()
+        );
+        println!("{col} {ost}{} {}", get_distro(), "");
+        println!("{col} {hostname} {}", get_hostname());
+        println!("{col} {cpu}{} {}", get_cpu_name(), "");
+        println!("{col} {kernel} {} {}", get_kernel(), "");
+        println!("{col} {totmem}{} {}", get_total_ram(), "");
+        println!("{col} {avmem}{} {}", get_available_ram(), "");
+        println!("{col} {usedmem}{} {}", get_used_ram(), "");
+        println!("{col} {totalroot}{} {}", get_total_disk(), "");
+        println!("{col} {avroot}{} {}", get_available_disk(), "");
+        println!("{col} {usedroot}{}", get_used_disk());
+        println!("{col} {desktop}{}", get_de());
+        println!("{col} {session_type}{}", get_session_type());
+        println!("{col} {username}{}", get_user());
+        println!("{col} {editor}{}", get_editor());
+        println!(
+            "{}",
+            "*================================================*".bright_magenta()
+        );
+    }
+    
 }
 
 fn get_help() {
