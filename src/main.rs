@@ -1,5 +1,7 @@
 use colored::*;
 use std::{env, fs, process::Command};
+extern crate os_type;
+
 fn main() {
     let asciiart = get_ascii_art();
     if asciiart != "NOASCII" {
@@ -97,8 +99,7 @@ fn main() {
             "{}",
             "*================================================*".green()
         );
-    }
-    else if style == "dracula" {
+    } else if style == "dracula" {
         const VERSION: &str = env!("CARGO_PKG_VERSION");
         let ost = "OS: ".magenta();
         let totmem = "Total RAM (Gb): ".magenta();
@@ -141,8 +142,94 @@ fn main() {
             "{}",
             "*================================================*".bright_magenta()
         );
+    } else if style == "manjaro" {
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let ost = "OS: ".green();
+        let totmem = "Total RAM (Gb): ".green();
+        let avmem = "Available RAM (Gb): ".green();
+        let usedmem = "Used RAM (Gb): ".green();
+        let totalroot = "Total Root Partition (Gb): ".green();
+        let avroot = "Available Root Partition (Gb): ".green();
+        let usedroot = "Used Root Partition (Gb): ".green();
+        let cpu = "CPU: ".green();
+        let desktop = "Desktop: ".green();
+        let session_type = "Session Type: ".green();
+        let username = "Username: ".green();
+        let editor = "Editor: ".green();
+        let version = "Version: ".green();
+        let kernel = "Kernel: ".green();
+        let hostname = "Hostname: ".green();
+        let col = "||".bright_green();
+        if showversion {
+            println!("{}{}", version, VERSION);
+        }
+        println!(
+            "{}",
+            "*================================================*".bright_green()
+        );
+        println!("{col} {ost}{} {}", get_distro(), "");
+        println!("{col} {hostname} {}", get_hostname());
+        println!("{col} {cpu}{} {}", get_cpu_name(), "");
+        println!("{col} {kernel} {} {}", get_kernel(), "");
+        println!("{col} {totmem}{} {}", get_total_ram(), "");
+        println!("{col} {avmem}{} {}", get_available_ram(), "");
+        println!("{col} {usedmem}{} {}", get_used_ram(), "");
+        println!("{col} {totalroot}{} {}", get_total_disk(), "");
+        println!("{col} {avroot}{} {}", get_available_disk(), "");
+        println!("{col} {usedroot}{}", get_used_disk());
+        println!("{col} {desktop}{}", get_de());
+        println!("{col} {session_type}{}", get_session_type());
+        println!("{col} {username}{}", get_user());
+        println!("{col} {editor}{}", get_editor());
+        println!(
+            "{}",
+            "*================================================*".bright_green()
+        );
     }
-    
+    else if style == "archlinux" {
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let ost = "OS: ".blue();
+        let totmem = "Total RAM (Gb): ".blue();
+        let avmem = "Available RAM (Gb): ".blue();
+        let usedmem = "Used RAM (Gb): ".blue();
+        let totalroot = "Total Root Partition (Gb): ".blue();
+        let avroot = "Available Root Partition (Gb): ".blue();
+        let usedroot = "Used Root Partition (Gb): ".blue();
+        let cpu = "CPU: ".blue();
+        let desktop = "Desktop: ".blue();
+        let session_type = "Session Type: ".blue();
+        let username = "Username: ".blue();
+        let editor = "Editor: ".blue();
+        let version = "Version: ".blue();
+        let kernel = "Kernel: ".blue();
+        let hostname = "Hostname: ".blue();
+        let col = "||".bright_blue();
+        if showversion {
+            println!("{}{}", version, VERSION);
+        }
+        println!(
+            "{}",
+            "*================================================*".bright_blue()
+        );
+        println!("{col} {ost}{} {}", get_distro(), "");
+        println!("{col} {hostname} {}", get_hostname());
+        println!("{col} {cpu}{} {}", get_cpu_name(), "");
+        println!("{col} {kernel} {} {}", get_kernel(), "");
+        println!("{col} {totmem}{} {}", get_total_ram(), "");
+        println!("{col} {avmem}{} {}", get_available_ram(), "");
+        println!("{col} {usedmem}{} {}", get_used_ram(), "");
+        println!("{col} {totalroot}{} {}", get_total_disk(), "");
+        println!("{col} {avroot}{} {}", get_available_disk(), "");
+        println!("{col} {usedroot}{}", get_used_disk());
+        println!("{col} {desktop}{}", get_de());
+        println!("{col} {session_type}{}", get_session_type());
+        println!("{col} {username}{}", get_user());
+        println!("{col} {editor}{}", get_editor());
+        println!(
+            "{}",
+            "*================================================*".bright_blue()
+        );
+    }
 }
 
 fn get_help() {
@@ -163,6 +250,7 @@ fn get_editor() -> String {
 }
 
 fn get_style() -> String {
+    let distro = os_type::current_platform().os_type;
     let homedir = env::var("HOME").unwrap_or("".to_string());
     let cfgpath = homedir + "/.config/qfetch/config.txt";
     if fs::metadata(cfgpath.clone()).is_ok() {
@@ -170,6 +258,10 @@ fn get_style() -> String {
         let lines: Vec<&str> = contents.split("\n").collect();
         let style = lines[0].to_string();
         return style;
+    } else if distro == os_type::OSType::Manjaro {
+        return "manjaro".to_string();
+    } else if distro == os_type::OSType::Arch {
+        return "archlinux".to_string();
     } else {
         return "default".to_string();
     }

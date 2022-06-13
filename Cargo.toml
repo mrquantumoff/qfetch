@@ -1,6 +1,6 @@
 [package]
 name = "qfetch"
-version = "0.7.0"
+version = "0.8.0"
 edition = "2021"
 description = "qfetch is a simple fetch tool inspired by pfetch, but written in rust."
 license = "BSD-2-Clause"
@@ -14,3 +14,4 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 colored = "2.0.0"
+os_type="2.4"
