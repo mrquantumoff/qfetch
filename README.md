@@ -36,6 +36,8 @@ qfetch is a tool that fetches info about your linux install.
 ## Installation using cargo
 * Dead simple, run ```cargo install qfetch```
 
+## Ubuntu binaries are available in [releases](https://github.com/mrquantumoff/qfetch/releases) tab
+
 ## Installation on Arch Linux or Arch Based Distros
 [Available on AUR](https://aur.archlinux.org/packages/qfetch/)
 
