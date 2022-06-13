@@ -39,7 +39,7 @@ qfetch is a tool that fetches info about your linux install.
 ## Ubuntu binaries are available in [releases](https://github.com/mrquantumoff/qfetch/releases) tab
 
 ## Installation on Arch Linux or Arch Based Distros
-[Available on AUR](https://aur.archlinux.org/packages/qfetch/)
+[Available on AUR](https://aur.archlinux.org/packages/qfetch-bin/)
 
 ## Help
 * Before creating an issue please check out the [wiki](https://github.com/mrquantumoff/qfetch/wiki/Setting-up-ASCII-logos)
