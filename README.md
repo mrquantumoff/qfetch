@@ -40,7 +40,9 @@ qfetch is a tool that fetches info about your linux install.
 
 ## Installation on Arch Linux or Arch Based Distros
 [Available on AUR (I officialy maintain it)](https://aur.archlinux.org/packages/qfetch-bin/)
+
 [Available on AUR (Maintained by kleintux)](https://aur.archlinux.org/packages/qfetch)
+
 ## Help
 * Before creating an issue please check out the [wiki](https://github.com/mrquantumoff/qfetch/wiki/Setting-up-ASCII-logos)
 * If the previous step didn't help, create an issue!
