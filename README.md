@@ -46,4 +46,4 @@ qfetch is a tool that fetches info about your linux install.
 ## Help
 * Before creating an issue please check out the [wiki](https://github.com/mrquantumoff/qfetch/wiki/Setting-up-ASCII-logos)
 * If the previous step didn't help, create an issue!
-* In tty the app may not display some data, try running it in a DE (if DE is null or empty then it will not display username, terminal, etc)
+* In tty the app may not display some data, try running it in a DE (if DE is null or empty then it will not display terminal and some other stuff)
